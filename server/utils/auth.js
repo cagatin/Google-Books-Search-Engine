@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+// TODO: update the auth middleware function to work w/ the GQL API
+
 // set token secret and expiration date
 const secret = 'mysecretsshhhhh';
 const expiration = '2h';
