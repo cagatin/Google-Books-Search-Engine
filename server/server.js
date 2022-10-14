@@ -5,7 +5,8 @@ const routes = require('./routes');
 
 // Import the apollo server 
 const { ApolloServer } = require('apollo-server-express');
-
+// Import Middlewear Authorization
+const { authMiddleware } = require('./utils/auth');
 // Import the typeDefs and resovlers
 const { typeDefs, resolvers } = require('./schemas')
 
@@ -15,7 +16,8 @@ const PORT = process.env.PORT || 3001;
 // Create an Instance of the Apollo Server
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  context: authMiddleware
 });
 
 app.use(express.urlencoded({ extended: true }));

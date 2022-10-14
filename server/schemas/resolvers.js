@@ -44,6 +44,8 @@ const resolvers = {
       const token = signToken(newUser);
 
       return { token, newUser };
-    }
+    },
+
+    saveBook: async(parent, { data })
   }
 }
