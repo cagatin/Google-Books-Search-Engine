@@ -26,7 +26,7 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       authorization: token ? `Bearer ${token}` : '',
     },
-  };
+  }; git
 });
 
 // Set up the client
@@ -63,5 +63,3 @@ function App() {
 }
 
 export default App;
-
-// TODO: Crete an Apollo provider to make every request work w/ the APollo Server
