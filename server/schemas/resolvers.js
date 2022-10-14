@@ -46,6 +46,23 @@ const resolvers = {
       return { token, newUser };
     },
 
-    saveBook: async(parent, { data })
+    saveBook: async (parent, { data }, context) => {
+      // If the user is logged in, save the book into the Author's book array.
+      if (context.user) {
+        // Create the Book
+        const newBook = Book.create(data);
+
+        // Update the User's saved books array
+        const userData = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: newBook } }
+        );
+
+        return userData;
+      } else {
+        throw new AuthenticationError("You must be logged in to save a book!")
+      }
+
+    }
   }
 }
