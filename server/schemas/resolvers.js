@@ -55,14 +55,31 @@ const resolvers = {
         // Update the User's saved books array
         const userData = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: newBook } }
+          { $addToSet: { savedBooks: newBook } },
+          { new: true }
         );
 
         return userData;
       } else {
-        throw new AuthenticationError("You must be logged in to save a book!")
+        throw new AuthenticationError("You must be logged in to save a book!");
       }
+    },
 
+    removeBook: async (parent, { bookId }) => {
+      // Check if the user is logged in
+      if (context.user) {
+        const userData = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedBooks: { bookId } } },
+          { new: true }
+        );
+
+        return userData;
+      } else {
+        throw new AuthenticationError('Must be logged in to remove a book!');
+      }
     }
   }
 }
+
+module.exports = resolvers;
