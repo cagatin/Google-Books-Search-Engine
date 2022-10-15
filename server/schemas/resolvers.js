@@ -1,7 +1,7 @@
 // Define the query and mutation functionality to work w/ the mongoose models
 // Hint: Use the functionality in the user-controller.js as a guide.
-import { User } from '../models';
-import { signToken } from '../utils/auth';
+const { User } = require('../models');
+const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {

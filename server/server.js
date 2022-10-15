@@ -28,6 +28,10 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 app.use(routes);
 
 // Create a new instance of an Apollo Server w/ the GQL schema
@@ -41,3 +45,5 @@ const startApolloServer = async (typeDefs, resolvers) => {
   });
 };
 
+// call the async function to start the sever
+startApolloServer(typeDefs, resolvers);
