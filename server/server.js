@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
-const routes = require('./routes');
 
 // Import the apollo server 
 const { ApolloServer } = require('apollo-server-express');
@@ -31,8 +30,6 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
-
-app.use(routes);
 
 // Create a new instance of an Apollo Server w/ the GQL schema
 // Implement apollo server and apply it to the express server as middleware
